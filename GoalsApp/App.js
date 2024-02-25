@@ -22,6 +22,12 @@ export default function App() {
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
   }
+  function deleteGoalHandler(id) {
+    //we will get id from goalitem.js file
+    setCourseGoals((currentCourseGoals) => {
+      return courseGoals.filter((goal) => goal.id !== id);
+    });
+  }
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -29,7 +35,13 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteItem={deleteGoalHandler}//passing this function to GoalItem.js
+                id={itemData.item.id}//this id will be passed to GoalInput.js and it will come back as a prop
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;
