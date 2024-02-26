@@ -20,7 +20,7 @@ export default function App() {
     ]);
   }
   function deleteGoalHandler(id) {
-    //we will get id from goalitem.js file
+    //we will get id from GoalItem.js file
     setCourseGoals((currentCourseGoals) => {
       return courseGoals.filter((goal) => goal.id !== id);
     });
